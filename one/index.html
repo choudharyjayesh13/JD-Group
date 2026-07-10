@@ -213,7 +213,7 @@ function hello(){
 }
 
 var INTENTS=[
- {k:["book a stay","stay","cottage","room at udai","udaisarovar","resort","camping","villa"],
+ {k:["book a stay","stay","cottage","room at udai","udaisarovar","resort","camping","villa","rooms"],
   f:function(){
    pendingBooking={num:WA_RESORT,label:"The Udaisarovar"};
    say("<b>The Udaisarovar – Lakeside Paradise</b> &#127965; lakeside cottages on Udai Sagar.\n\n&#8226; Cottage (weekday, room only) — ₹3,000\n&#8226; Cottage (weekday + breakfast) — ₹3,500\n&#8226; Cottage (weekend + breakfast) — ₹5,500\n&#8226; Full villa buyout — ₹18,000–₹39,999\n&#8226; Lakeside camping — on request\n\nTell me your <b>dates and number of guests</b> and I'll set up the booking, or tap below.",
@@ -229,7 +229,7 @@ var INTENTS=[
  {k:["salon","hair","makeup","makeover","spa","beauty","glow","facial","bridal"],
   f:function(){say("<b>House of Beauty</b> &#128136; — unisex salon &amp; makeover studio at the Belmonte campus, Ravindra Nagar (L'Or&#233;al Professionnel partner). Hair, skin, makeup, nails &amp; spa for men and women. Bridal makeovers a speciality.",
    [{label:"Book appointment",href:wa(WA_GROUP,"House of Beauty appointment")}]);}},
- {k:["cpc one","capital tower","invest","showroom","office","retail","crown fort"],
+ {k:["cpc one","capital tower","invest","showroom","showrooms","office","offices","retail","crown fort","tower"],
   f:function(){say("<b>CPC One – Capital Tower</b> &#127959; our flagship upcoming landmark near Geetanjali Hospital, Udaipur:\n\n&#8226; ~1,20,000 sq ft saleable in ~1,50,000 sq ft construction\n&#8226; 24 premium showrooms (624 sq ft) + 2 anchors (3,500 sq ft)\n&#8226; 16 premium offices (600 sq ft)\n&#8226; 5–6 F&amp;B outlets · 2-level basement parking\n&#8226; Crowned by <b>The Crown Fort House</b> — a 60–80 key business hotel\n&#8226; Target: 2028–30\n\nRetail, office and partnership enquiries are open.",
    [{label:"Enquire now",href:wa(WA_GROUP,"CPC One Capital Tower enquiry")},{label:"Project page",href:"../ventures/cpc-one.html",orange:true}]);}},
  {k:["property","plot","land","township","real estate","zameen"],
@@ -278,7 +278,7 @@ function handle(t){
   }
   for(var i=0;i<INTENTS.length;i++){
     for(var j=0;j<INTENTS[i].k.length;j++){
-      if(q.indexOf(INTENTS[i].k[j])>-1){INTENTS[i].f();return;}
+      if(new RegExp("\\b"+INTENTS[i].k[j].replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\b").test(q)){INTENTS[i].f();return;}
     }
   }
   say("I want to get this exactly right — let me hand your question to a real person on the JD team (they reply fast on WhatsApp):",
