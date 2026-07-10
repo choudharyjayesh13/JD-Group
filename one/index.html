@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>JD One — Every JD experience, one app</title>
+<meta name="description" content="JD One — the JD Group web app: book stays, tables, salon appointments, party tickets and property visits across every JD venture, from one place.">
+<meta property="og:title" content="JD One — Every JD experience, one app">
+<meta property="og:description" content="Stays, dining, nightlife, salon, events and property — every JD Group venture in one app.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.myjdgroup.com/one/">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/svg+xml" href="../assets/jd-logo.svg">
+<link rel="apple-touch-icon" href="../assets/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#08120d">
+<style>
+:root{
+  --bg:#08120d; --panel:#0d1b14; --panel2:#12241b; --edge:rgba(120,180,145,.16);
+  --txt:#e9f2ec; --mut:#8aa396; --dim:#5d7468;
+  --jd:#ff7a1a; --jd-glow:rgba(255,122,26,.35); --gold:#c9a24b;
+  --mono:"SF Mono",Menlo,Consolas,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;background:var(--bg);color:var(--txt);line-height:1.55;
+  max-width:520px;margin:0 auto;padding:0 16px calc(30px + env(safe-area-inset-bottom));min-height:100vh}
+header{display:flex;align-items:center;justify-content:space-between;padding:18px 2px 14px;position:sticky;top:0;background:rgba(8,18,13,.92);backdrop-filter:blur(10px);z-index:10}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.06em;font-size:1.12rem;text-decoration:none;color:var(--txt)}
+.brand img{height:38px;width:38px}
+.brand span{color:var(--jd)}
+.pill{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;color:var(--gold);border:1px solid rgba(201,162,75,.45);border-radius:20px;padding:4px 10px}
+.wallet{background:linear-gradient(135deg,rgba(255,122,26,.16),rgba(201,162,75,.1));border:1px solid rgba(255,122,26,.35);border-radius:18px;padding:20px;margin:10px 0 18px}
+.wallet .lbl{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;color:var(--mut);text-transform:uppercase}
+.wallet .amt{font-size:1.9rem;font-weight:700;margin:6px 0 2px}
+.wallet .amt span{color:var(--jd)}
+.wallet .sub{font-size:.78rem;color:var(--mut)}
+.wallet a{display:inline-block;margin-top:12px;background:var(--jd);color:#160b03;text-decoration:none;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:10px 18px;border-radius:8px;box-shadow:0 0 22px var(--jd-glow)}
+h2{font-size:.78rem;font-family:var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--jd);margin:26px 0 12px}
+.qa{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.qa a{background:var(--panel2);border:1px solid var(--edge);border-radius:14px;padding:14px 6px;text-align:center;text-decoration:none;color:var(--mut);font-size:.7rem;transition:.2s}
+.qa a:active,.qa a:hover{border-color:rgba(255,122,26,.5);color:var(--jd)}
+.qa b{display:block;font-size:1.35rem;margin-bottom:4px}
+.list{display:grid;gap:10px}
+.item{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px solid var(--edge);border-radius:14px;padding:12px 14px;text-decoration:none;color:var(--txt);transition:.2s}
+.item:active,.item:hover{border-color:rgba(255,122,26,.5)}
+.item img{height:44px;width:44px;object-fit:contain;background:#fdfcf8;border-radius:10px;padding:4px;flex-shrink:0}
+.item img.cover{object-fit:cover;padding:0}
+.item .t{flex:1;min-width:0}
+.item .t b{display:block;font-size:.92rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item .t span{font-size:.72rem;color:var(--dim);font-family:var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.item .go{color:var(--jd);font-size:1.1rem}
+.wa-bar{position:fixed;bottom:calc(14px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:min(488px,calc(100% - 32px));z-index:20}
+.wa-bar a{display:block;text-align:center;background:#25d366;color:#06130a;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.85rem;padding:15px;border-radius:14px;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.note{background:var(--panel2);border:1px dashed rgba(201,162,75,.4);border-radius:14px;padding:14px 16px;font-size:.8rem;color:var(--mut);margin-top:24px}
+.note b{color:var(--gold)}
+footer{margin:30px 0 74px;text-align:center;color:var(--dim);font-size:.74rem}
+footer a{color:var(--mut)}
+.install{display:none;background:var(--panel2);border:1px solid var(--edge);border-radius:14px;padding:14px 16px;font-size:.8rem;color:var(--mut);margin-top:14px}
+/* JD BOT */
+.bot-fab{position:fixed;bottom:calc(84px + env(safe-area-inset-bottom));right:max(16px,calc(50% - 244px));z-index:30;
+  width:60px;height:60px;border-radius:50%;border:2px solid rgba(255,255,255,.25);background:linear-gradient(135deg,#ff9a4d,#e2691f);
+  box-shadow:0 8px 26px rgba(0,0,0,.5),0 0 26px var(--jd-glow);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.7rem}
+.bot-panel{position:fixed;inset:auto max(10px,calc(50% - 250px)) calc(10px + env(safe-area-inset-bottom)) auto;width:min(400px,calc(100% - 20px));
+  height:min(600px,calc(100vh - 80px));background:var(--bg);border:1px solid rgba(255,122,26,.4);border-radius:20px;z-index:40;
+  display:none;flex-direction:column;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.65)}
+.bot-panel.open{display:flex}
+.bot-head{display:flex;align-items:center;gap:11px;padding:14px 16px;background:linear-gradient(135deg,rgba(255,122,26,.18),rgba(201,162,75,.08));border-bottom:1px solid var(--edge)}
+.bot-head img{height:36px;width:36px}
+.bot-head b{font-size:1rem}
+.bot-head .st{display:block;font-family:var(--mono);font-size:.6rem;letter-spacing:.12em;color:#5fd08a}
+.bot-head button{margin-left:auto;background:none;border:none;color:var(--mut);font-size:1.5rem;cursor:pointer;padding:4px 8px}
+.bot-log{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:86%;padding:10px 14px;border-radius:16px;font-size:.88rem;white-space:pre-line}
+.msg.bot{background:var(--panel2);border:1px solid var(--edge);border-bottom-left-radius:5px;align-self:flex-start}
+.msg.me{background:var(--jd);color:#160b03;border-bottom-right-radius:5px;align-self:flex-end;font-weight:500}
+.msg a{color:var(--jd);font-weight:600}
+.msg.bot .act{display:inline-block;margin:8px 6px 0 0;background:#25d366;color:#06130a;text-decoration:none;font-size:.76rem;font-weight:700;padding:8px 13px;border-radius:9px}
+.msg.bot .act.orange{background:var(--jd)}
+.chips{display:flex;flex-wrap:wrap;gap:7px;align-self:flex-start;max-width:92%}
+.chips button{background:none;border:1px solid rgba(255,122,26,.5);color:var(--jd);border-radius:20px;padding:6px 13px;font-size:.76rem;cursor:pointer}
+.chips button:active{background:rgba(255,122,26,.15)}
+.bot-in{display:flex;gap:8px;padding:12px;border-top:1px solid var(--edge);background:var(--panel)}
+.bot-in input{flex:1;background:var(--bg);border:1px solid var(--edge);border-radius:12px;color:var(--txt);padding:12px 14px;font-size:.9rem;outline:none}
+.bot-in input:focus{border-color:rgba(255,122,26,.5)}
+.bot-in button{background:var(--jd);border:none;border-radius:12px;color:#160b03;font-size:1.15rem;padding:0 16px;cursor:pointer}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="brand" href="#top" id="top"><img src="../assets/jd-logo.svg" alt="JD One">JD<span>&#9670;</span>ONE</a>
+  <span class="pill">EARLY ACCESS</span>
+</header>
+
+<div class="wallet">
+  <div class="lbl">JD Wallet &amp; Rewards</div>
+  <div class="amt">Coming <span>soon</span></div>
+  <div class="sub">One balance and one set of rewards across every JD hotel, salon, club and event. Early members get founding rewards.</div>
+  <a href="https://wa.me/918233334435?text=I%20want%20early%20access%20to%20JD%20One">Join the waitlist</a>
+</div>
+
+<h2>Quick actions</h2>
+<div class="qa">
+  <a href="https://wa.me/918829809555?text=I%20want%20to%20book%20a%20stay%20at%20The%20Udaisarovar"><b>&#127965;</b>Stay</a>
+  <a href="https://wa.me/918233334435?text=Table%20booking%20enquiry"><b>&#127869;</b>Dine</a>
+  <a href="https://www.pronite.in"><b>&#127911;</b>Party</a>
+  <a href="https://wa.me/918233334435?text=House%20of%20Beauty%20appointment"><b>&#128136;</b>Glow</a>
+  <a href="https://wa.me/918233334435?text=Hotel%20room%20booking%20enquiry"><b>&#128716;</b>Hotels</a>
+  <a href="https://wa.me/918233334435?text=Event%20planning%20enquiry"><b>&#127882;</b>Events</a>
+  <a href="https://wa.me/918233334435?text=CPC%20property%20enquiry"><b>&#127968;</b>Property</a>
+  <a href="https://wa.me/918233334435?text=CPC%20One%20Capital%20Tower%20enquiry"><b>&#127959;</b>CPC One</a>
+</div>
+
+<h2>Stay &amp; resorts</h2>
+<div class="list">
+  <a class="item" href="../ventures/udaisarovar.html"><img class="cover" src="../assets/ventures/photo-udaisarovar.jpg" alt=""><div class="t"><b>The Udaisarovar – Lakeside Paradise</b><span>Flagship resort · Udaipur</span></div><span class="go">&#8594;</span></a>
+  <a class="item" href="../ventures/artist-house.html"><img src="../assets/ventures/logo-artisthouse.png" alt=""><div class="t"><b>The Artist House</b><span>Hotel &amp; club · Udaipur</span></div><span class="go">&#8594;</span></a>
+  <a class="item" href="../ventures/belmonte-house.html"><img src="../assets/ventures/logo-belmonte.png" alt=""><div class="t"><b>The Belmonte House</b><span>Boutique hotel · Udaipur</span></div><span class="go">&#8594;</span></a>
+  <a class="item" href="../ventures/kirti-plaza.html"><img class="cover" src="../assets/ventures/photo-kirtiplaza.jpg" alt=""><div class="t"><b>Hotel Kirti Plaza</b><span>Hotel · Chittorgarh</span></div><span class="go">&#8594;</span></a>
+</div>
+
+<h2>Eat, drink &amp; party</h2>
+<div class="list">
+  <a class="item" href="../ventures/illuzion.html"><img src="../assets/ventures/logo-illuzion.png" alt=""><div class="t"><b>Illuzion Bar &amp; Lounge</b><span>Bar &amp; club · Belmonte campus</span></div><span class="go">&#8594;</span></a>
+  <a class="item" href="../ventures/casablanca.html"><img src="../assets/ventures/logo-casablanca.png" alt=""><div class="t"><b>Casablanca</b><span>Pool bar &amp; kitchen</span></div><span class="go">&#8594;</span></a>
+  <a class="item" href="../ventures/pizzeria-locale.html"><img src="../assets/ventures/logo-pizzeria.png" alt=""><div class="t"><b>Pizzeria Locale</b><span>Pizza &amp; grill</span></div><span class="go">&#8594;</span></a>
+  <a class="item" href="../ventures/wine-house.html"><img src="../assets/ventures/logo-winehouse.png" alt=""><div class="t"><b>The Wine House</b><span>Liquor store · NH-8</span></div><span class="go">&#8594;</span></a>
+  <a class="item" href="https://www.pronite.in"><img src="../assets/ventures/logo-pronite.png" alt=""><div class="t"><b>Pronite.in</b><span>Events &amp; nightlife platform</span></div><span class="go">&#8599;</span></a>
+</div>
+
+<h2>Lifestyle &amp; more</h2>
+<div class="list">
+  <a class="item" href="../ventures/house-of-beauty.html"><img src="../assets/ventures/logo-hob.png" alt=""><div class="t"><b>House of Beauty</b><span>Unisex salon &amp; makeover studio</span></div><span class="go">&#8594;</span></a>
+  <a class="item" href="../ventures/jd-production.html"><img src="../assets/icon-192.png" alt=""><div class="t"><b>JD Production &amp; Entertainers</b><span>Events &amp; entertainment</span></div><span class="go">&#8594;</span></a>
+  <a class="item" href="../ventures/one-network.html"><img src="../assets/ventures/logo-onenetwork.png" alt=""><div class="t"><b>One Network</b><span>Private members' circle</span></div><span class="go">&#8594;</span></a>
+  <a class="item" href="../ventures/bpcl-barisadri.html"><img src="../assets/ventures/logo-bpcl.png" alt=""><div class="t"><b>BPCL Barisadri</b><span>Filling station · since 1995</span></div><span class="go">&#8594;</span></a>
+</div>
+
+<h2>Property &amp; investments</h2>
+<div class="list">
+  <a class="item" href="../ventures/cpc-one.html"><img class="cover" src="../assets/ventures/photo-crownfort.jpg" alt=""><div class="t"><b>CPC One – Capital Tower</b><span>Flagship project · Udaipur</span></div><span class="go">&#8594;</span></a>
+  <a class="item" href="../ventures/crown-fort-house.html"><img src="../assets/ventures/logo-crownfort.png" alt=""><div class="t"><b>The Crown Fort House</b><span>Upcoming hotel · CPC One</span></div><span class="go">&#8594;</span></a>
+  <a class="item" href="../ventures/cpc.html"><img src="../assets/ventures/logo-cpc.png" alt=""><div class="t"><b>CPC — Choudhary Properties</b><span>Real estate since 1999</span></div><span class="go">&#8594;</span></a>
+  <a class="item" href="https://www.stepwhere.in"><img src="../assets/ventures/logo-stepwhere.png" alt=""><div class="t"><b>Stepwhere.in</b><span>Smart child-safety shoes</span></div><span class="go">&#8599;</span></a>
+  <a class="item" href="../ventures/aloe-e-cell.html"><img class="cover" src="../assets/ventures/photo-aloe.jpg" alt=""><div class="t"><b>Aloe E-Cell</b><span>Green energy investment</span></div><span class="go">&#8594;</span></a>
+</div>
+
+<div class="install" id="install-hint">
+  <b>&#128241; Add JD One to your phone:</b> in your browser menu choose <b>"Add to Home Screen"</b> — it installs like an app, works offline, and opens full-screen.
+</div>
+
+<div class="note"><b>Early access.</b> Wallet, rewards and one-tap booking are in build. Today, every button connects you straight to the JD team on WhatsApp — real people, instant confirmation.</div>
+
+<footer>
+  &copy; 2026 JD Group of Companies · <a href="../index.html">myjdgroup.com</a> · <a href="tel:+918233334435">+91 82333 34435</a>
+</footer>
+
+<div class="wa-bar"><a href="https://wa.me/918233334435?text=Hello%20JD%20One%20team">&#9993; Book anything on WhatsApp</a></div>
+
+<button class="bot-fab" id="bot-fab" aria-label="Chat with JD Bot">&#129302;</button>
+<div class="bot-panel" id="bot-panel" role="dialog" aria-label="JD Bot chat">
+  <div class="bot-head">
+    <img src="../assets/jd-logo.svg" alt="">
+    <div><b>JD Bot</b><span class="st">&#9679; ONLINE · ANSWERS &amp; BOOKS ANYTHING</span></div>
+    <button id="bot-close" aria-label="Close chat">&times;</button>
+  </div>
+  <div class="bot-log" id="bot-log"></div>
+  <div class="bot-in">
+    <input id="bot-input" type="text" placeholder="Ask me anything — rates, dates, events…" autocomplete="off">
+    <button id="bot-send" aria-label="Send">&#10148;</button>
+  </div>
+</div>
+
+<script>
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(function(){});
+if (!matchMedia("(display-mode: standalone)").matches && !navigator.standalone)
+  document.getElementById("install-hint").style.display = "block";
+</script>
+<script>
+(function(){
+var WA_GROUP="918233334435", WA_RESORT="918829809555";
+var log=document.getElementById("bot-log"), input=document.getElementById("bot-input"),
+    panel=document.getElementById("bot-panel");
+var pendingBooking=null;
+
+function wa(num,text){return "https://wa.me/"+num+"?text="+encodeURIComponent(text);}
+function esc(s){return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+
+function say(html, acts, chips){
+  var m=document.createElement("div"); m.className="msg bot"; m.innerHTML=html;
+  (acts||[]).forEach(function(a){
+    var x=document.createElement("a"); x.className="act"+(a.orange?" orange":""); x.href=a.href; x.textContent=a.label;
+    if(a.href.indexOf("http")===0) x.target="_blank";
+    m.appendChild(x);
+  });
+  log.appendChild(m);
+  if(chips&&chips.length){
+    var c=document.createElement("div"); c.className="chips";
+    chips.forEach(function(t){var b=document.createElement("button");b.textContent=t;
+      b.onclick=function(){c.remove();send(t);};c.appendChild(b);});
+    log.appendChild(c);
+  }
+  log.scrollTop=log.scrollHeight;
+}
+function me(t){var m=document.createElement("div");m.className="msg me";m.textContent=t;log.appendChild(m);log.scrollTop=log.scrollHeight;}
+
+var MAIN_CHIPS=["Book a stay","Plan a wedding or event","Party tonight","Salon appointment","CPC One project","Rates"];
+
+function hello(){
+  say("Namaste! &#128075; I'm <b>JD Bot</b> — I can answer questions and book anything across JD Group: stays, tables, parties, salon, events and property. What can I do for you?",[],MAIN_CHIPS);
+}
+
+var INTENTS=[
+ {k:["book a stay","stay","cottage","room at udai","udaisarovar","resort","camping","villa"],
+  f:function(){
+   pendingBooking={num:WA_RESORT,label:"The Udaisarovar"};
+   say("<b>The Udaisarovar – Lakeside Paradise</b> &#127965; lakeside cottages on Udai Sagar.\n\n&#8226; Cottage (weekday, room only) — ₹3,000\n&#8226; Cottage (weekday + breakfast) — ₹3,500\n&#8226; Cottage (weekend + breakfast) — ₹5,500\n&#8226; Full villa buyout — ₹18,000–₹39,999\n&#8226; Lakeside camping — on request\n\nTell me your <b>dates and number of guests</b> and I'll set up the booking, or tap below.",
+   [{label:"Book on WhatsApp",href:wa(WA_RESORT,"Hello, I want to book a stay at The Udaisarovar")}]);}},
+ {k:["wedding","event","phere","shaadi","birthday","baby shower","corporate","offsite","celebrat"],
+  f:function(){
+   pendingBooking={num:WA_RESORT,label:"an event at The Udaisarovar"};
+   say("We host <b>weddings, phere, birthdays, Holi parties, DJ nights &amp; corporate offsites</b> by the lake at The Udaisarovar — full stage, d&#233;cor and production by JD Production.\n\n&#8226; Wedding setup — from ₹1,00,000\n&#8226; With catering — from ₹1,50,000\n&#8226; Up to 150 guests\n\nShare your <b>date, occasion and guest count</b> and I'll pass it straight to the events team.",
+   [{label:"Plan my event",href:wa(WA_RESORT,"Hello, I want to plan an event at The Udaisarovar")}]);}},
+ {k:["party","club","night","dj","illuzion","pronite","dance"],
+  f:function(){say("Tonight's options &#127911;\n\n&#8226; <b>Illuzion Bar &amp; Lounge</b> — Udaipur's most sophisticated club, at The Belmonte House (themed nights, cocktails, Chinese &amp; North Indian kitchen)\n&#8226; <b>Pronite.in</b> — the city's event &amp; ticket platform: see what's on tonight",
+   [{label:"Table at Illuzion",href:wa(WA_GROUP,"Illuzion table booking")},{label:"Events on Pronite",href:"https://www.pronite.in",orange:true}]);}},
+ {k:["salon","hair","makeup","makeover","spa","beauty","glow","facial","bridal"],
+  f:function(){say("<b>House of Beauty</b> &#128136; — unisex salon &amp; makeover studio at the Belmonte campus, Ravindra Nagar (L'Or&#233;al Professionnel partner). Hair, skin, makeup, nails &amp; spa for men and women. Bridal makeovers a speciality.",
+   [{label:"Book appointment",href:wa(WA_GROUP,"House of Beauty appointment")}]);}},
+ {k:["cpc one","capital tower","invest","showroom","office","retail","crown fort"],
+  f:function(){say("<b>CPC One – Capital Tower</b> &#127959; our flagship upcoming landmark near Geetanjali Hospital, Udaipur:\n\n&#8226; ~1,20,000 sq ft saleable in ~1,50,000 sq ft construction\n&#8226; 24 premium showrooms (624 sq ft) + 2 anchors (3,500 sq ft)\n&#8226; 16 premium offices (600 sq ft)\n&#8226; 5–6 F&amp;B outlets · 2-level basement parking\n&#8226; Crowned by <b>The Crown Fort House</b> — a 60–80 key business hotel\n&#8226; Target: 2028–30\n\nRetail, office and partnership enquiries are open.",
+   [{label:"Enquire now",href:wa(WA_GROUP,"CPC One Capital Tower enquiry")},{label:"Project page",href:"../ventures/cpc-one.html",orange:true}]);}},
+ {k:["property","plot","land","township","real estate","zameen"],
+  f:function(){say("<b>CPC — Choudhary Properties and Consultancy</b> has developed townships and land across Chittorgarh &amp; Udaipur since 1999 — site selection, documentation and end-to-end support.",
+   [{label:"Property enquiry",href:wa(WA_GROUP,"CPC property enquiry")}]);}},
+ {k:["rate","price","cost","tariff","kitna","charges"],
+  f:function(){say("Quick rate card &#8377;\n\n&#8226; Udaisarovar cottage — from ₹3,000/night\n&#8226; Full villa buyout — from ₹18,000\n&#8226; Wedding setup — from ₹1,00,000\n&#8226; Meals — breakfast ₹300 · lunch ₹500 · dinner ₹800\n\nWhich one shall I book for you?",[],["Book a stay","Plan a wedding or event"]);}},
+ {k:["chittorgarh","kirti"],
+  f:function(){say("<b>Hotel Kirti Plaza</b> — Chittorgarh's trusted address since 2002: 51 AC rooms, restaurant, meeting rooms, garden &amp; parking, 3 km from the great fort.",
+   [{label:"Book Kirti Plaza",href:wa(WA_GROUP,"Hotel Kirti Plaza booking")}]);}},
+ {k:["artist house","artist"],
+  f:function(){say("<b>The Artist House</b> — eat, drink, work, stay. Boutique rooms in a former theatre building in old Udaipur, with a club, taproom, pizzeria, co-working and a tropical pool. 4.3/5 on TripAdvisor.",
+   [{label:"Book / reserve",href:wa(WA_GROUP,"The Artist House enquiry")}]);}},
+ {k:["belmonte","casablanca","pool bar"],
+  f:function(){say("<b>The Belmonte House</b> — 30-room French-inspired boutique hotel in Pratap Nagar with a rooftop pool. Same campus: <b>Casablanca</b> pool bar &amp; kitchen (open 4 PM–11:30 PM), <b>Illuzion</b> club and <b>House of Beauty</b> salon.",
+   [{label:"Book Belmonte",href:wa(WA_GROUP,"The Belmonte House enquiry")},{label:"Table at Casablanca",href:wa(WA_GROUP,"Casablanca table booking")}]);}},
+ {k:["pizza","pizzeria"],
+  f:function(){say("<b>Pizzeria Locale</b> &#127829; — true wood-fired Italian pizza in Udaipur, rated 4.1/5. Also at The Artist House.",
+   [{label:"Order / enquire",href:wa(WA_GROUP,"Pizzeria Locale enquiry")}]);}},
+ {k:["wine","liquor","beer","drink shop"],
+  f:function(){say("<b>The Wine House</b> — beer, wine &amp; spirits on NH-8, Bypass Chouraha, Transport Nagar, Udaipur. Easy highway parking. Please drink responsibly.",
+   [{label:"Open in Maps",href:"https://maps.google.com/?q=The+Wine+House+Transport+Nagar+Udaipur",orange:true}]);}},
+ {k:["petrol","fuel","bpcl","diesel"],
+  f:function(){say("<b>BPCL Filling Station, Barisadri</b> — Bharat Petroleum dealership in Chittorgarh district, serving since 1995. It's where the JD story began.");}},
+ {k:["shoes","stepwhere","child","kids"],
+  f:function(){say("<b>Stepwhere</b> &#128095; — GPS smart school shoes: real-time tracking, geo-fence alerts and step counting, on stepwhere.in and Amazon.",
+   [{label:"Visit stepwhere.in",href:"https://www.stepwhere.in",orange:true}]);}},
+ {k:["wallet","reward","member","jd one","points","waitlist"],
+  f:function(){say("<b>JD One wallet &amp; rewards</b> are in build — one balance and one set of rewards across every JD hotel, salon, club and event. Early members get founding rewards.",
+   [{label:"Join the waitlist",href:wa(WA_GROUP,"I want early access to JD One")}]);}},
+ {k:["contact","phone","number","address","location","call"],
+  f:function(){say("&#128222; <b>JD Group</b>: +91 82333 34435 · connect@myjdgroup.com\n&#127965; <b>The Udaisarovar</b>: +91 88298 09555, Lakadwas, Udaipur\n&#127970; Belmonte campus: K-34 Ravindra Nagar, Pratap Nagar, Udaipur",
+   [{label:"WhatsApp us",href:wa(WA_GROUP,"Hello JD Group")}]);}},
+ {k:["hi","hello","hey","namaste","hii"],f:function(){hello();}},
+ {k:["thank","thanks","shukriya","great","nice","ok"],f:function(){say("Always a pleasure! &#128522; Anything else — a stay, a party, a project?",[],MAIN_CHIPS);}}
+];
+
+function handle(t){
+  var q=t.toLowerCase();
+  // date-ish reply while a booking is pending → compose WhatsApp handoff
+  if(pendingBooking && (q.match(/\d/)||q.match(/jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec|tomorrow|today|weekend|guest|people|pax/))){
+    var b=pendingBooking; pendingBooking=null;
+    say("Perfect &#9989; I've prepared your booking request for <b>"+b.label+"</b>:\n\n&#8220;"+esc(t)+"&#8221;\n\nOne tap and it goes to the team on WhatsApp — they confirm instantly.",
+      [{label:"Send booking request",href:wa(b.num,"Booking request via JD One — "+b.label+": "+t)}]);
+    return;
+  }
+  for(var i=0;i<INTENTS.length;i++){
+    for(var j=0;j<INTENTS[i].k.length;j++){
+      if(q.indexOf(INTENTS[i].k[j])>-1){INTENTS[i].f();return;}
+    }
+  }
+  say("I want to get this exactly right — let me hand your question to a real person on the JD team (they reply fast on WhatsApp):",
+    [{label:"Ask the team",href:wa(WA_GROUP,"Question via JD One: "+t)}],MAIN_CHIPS);
+}
+
+function send(t){t=(t||input.value).trim();if(!t)return;input.value="";me(t);setTimeout(function(){handle(t);},350);}
+
+document.getElementById("bot-fab").onclick=function(){
+  panel.classList.add("open");
+  if(!log.children.length) hello();
+  input.focus();
+};
+document.getElementById("bot-close").onclick=function(){panel.classList.remove("open");};
+document.getElementById("bot-send").onclick=function(){send();};
+input.addEventListener("keydown",function(e){if(e.key==="Enter")send();});
+})();
+</script>
+</body>
+</html>
