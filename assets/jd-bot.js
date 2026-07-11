@@ -130,7 +130,7 @@
       f: function () { say("<b>JD One</b> — our web app: every venture in one place, with wallet &amp; rewards coming soon. Add it to your home screen from the link below.",
         [{ label: "Open JD One", href: BASE + "../one/index.html", orange: true }, { label: "Join the waitlist", href: wa(WA_GROUP, "I want early access to JD One") }]); } },
     { k: ["contact", "phone", "number", "address", "location", "call"],
-      f: function () { say("📞 <b>JD Group</b>: +91 82333 34435 · connect@myjdgroup.com\n🏝 <b>The Udaisarovar</b>: +91 88298 09555, Lakadwas, Udaipur\n🏢 Belmonte campus: K-34 Ravindra Nagar, Pratap Nagar, Udaipur",
+      f: function () { say("📞 <b>JD Group</b>: +91 96203 07861 · +91 82333 34435 · connect@myjdgroup.com\n🏝 <b>The Udaisarovar</b>: +91 88298 09555, Lakadwas, Udaipur\n🏢 Belmonte campus: K-34 Ravindra Nagar, Pratap Nagar, Udaipur",
         [{ label: "WhatsApp us", href: wa(WA_GROUP, "Hello JD Group") }]); } },
     { k: ["hi", "hello", "hey", "namaste", "hii"], f: function () { hello(); } },
     { k: ["thank", "thanks", "shukriya", "great", "nice"], f: function () { say("Always a pleasure! 😊 Anything else — a stay, a party, a project?", [], MAIN_CHIPS); } }
