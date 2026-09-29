@@ -1,6 +1,6 @@
 /* JD Bot — site-wide concierge. Answers questions, passes every lead to WhatsApp. */
 (function () {
-  var WA_GROUP = "918233334435", WA_RESORT = "918829809555";
+  var WA_GROUP = "918233334435", WA_RESORT = "918829809555", WA_KIRTI = "917728888011";
   var sc = document.currentScript && document.currentScript.src || "assets/jd-bot.js";
   var BASE = sc.replace(/jd-bot\.js.*$/, ""); // .../assets/
   var pendingBooking = null;
@@ -108,7 +108,7 @@
       f: function () { say("Quick rate card ₹\n\n• Udaisarovar cottage — from ₹3,000/night\n• Full villa buyout — from ₹18,000\n• Wedding setup — from ₹1,00,000\n• Meals — breakfast ₹300 · lunch ₹500 · dinner ₹800\n\nWhich one shall I book for you?", [], ["Book a stay", "Plan a wedding or event"]); } },
     { k: ["chittorgarh", "kirti"],
       f: function () { say("<b>Hotel Kirti Plaza</b> — Chittorgarh's trusted address since 2002: 51 AC rooms, restaurant, meeting rooms, garden &amp; parking, 3 km from the great fort.",
-        [{ label: "Book Kirti Plaza", href: wa(WA_GROUP, "Hotel Kirti Plaza booking") }]); } },
+        [{ label: "Book Kirti Plaza", href: wa(WA_KIRTI, "Hotel Kirti Plaza booking") }]); } },
     { k: ["artist house", "artist"],
       f: function () { say("<b>The Artist House</b> — eat, drink, work, stay. Boutique rooms in a former theatre building in old Udaipur, with a club, taproom, pizzeria, co-working and a tropical pool. 4.3/5 on TripAdvisor.",
         [{ label: "Book / reserve", href: wa(WA_GROUP, "The Artist House enquiry") }]); } },
