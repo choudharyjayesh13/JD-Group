@@ -103,6 +103,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .open{margin-top:4px;font-size:12px;text-transform:uppercase;letter-spacing:.24em}
 .duo{display:grid;gap:28px}
 @media(min-width:1000px){.duo{grid-template-columns:1fr 1fr}}
+.two .card{flex-direction:column;align-items:center;text-align:center;justify-content:flex-start;padding:40px 28px 36px;gap:28px}
+.two .card .txt{align-items:center;min-width:0;width:100%}
+.two .card .eyebrow{padding-left:.34em!important}
+.two .card .name{font-size:clamp(26px,2.6vw,38px)}
+.two .chips{justify-content:center}
+.plate.big{width:200px;height:200px}
+@media(max-width:639px){.plate.big{width:170px;height:170px}}
 
 /* Property / venture grids */
 .back{align-self:flex-start;min-height:44px;font-size:12px;text-transform:uppercase;letter-spacing:.2em}
@@ -146,7 +153,7 @@ footer a:hover{color:#17140f}
   <button class="skip" type="button" data-go="group">Skip</button>
 </section>
 
-<!-- 2. JD Group: JD Stays & Hospitality, CPC, Our Ventures -->
+<!-- 2. JD Group: two doors – JD Stays & Hospitality and JD Group Companies -->
 <section class="screen" id="group">
   <div class="page">
     <header class="head rise">
@@ -158,31 +165,21 @@ footer a:hover{color:#17140f}
       </div>
     </header>
 
-    <button type="button" class="card circ pop" data-go="stays" style="animation-delay:.05s">
-      <span class="orb"><span class="orbit gold" aria-hidden="true"></span><span class="plate light" style="width:200px;height:200px"><img src="assets/brands/jd-stays.webp" alt="JD Stays & Hospitality logo"></span></span>
-      <span class="txt">
-        <span class="eyebrow" style="padding-left:0">Hotels &amp; resorts</span>
-        <span class="name">JD Stays &amp; Hospitality</span>
-        <span class="chips" id="stay-chips"></span>
-        <span class="open">Open →</span>
-      </span>
-    </button>
-
-    <div class="duo">
-      <a class="card circ pop" href="ventures/cpc.html" style="animation-delay:.18s">
-        <span class="orb"><span class="plate light" style="width:150px;height:150px"><img src="assets/brands/cpc.webp" alt="CPC logo"></span></span>
+    <div class="duo two">
+      <button type="button" class="card circ pop" data-go="stays" style="animation-delay:.05s">
+        <span class="orb"><span class="orbit gold" aria-hidden="true"></span><span class="plate light big"><img src="assets/brands/jd-stays.webp" alt="JD Stays & Hospitality logo"></span></span>
         <span class="txt">
-          <span class="eyebrow" style="padding-left:0">Real estate · since 1999</span>
-          <span class="name sm">CPC</span>
-          <span style="font-size:14px;color:#3a332a;line-height:1.6">Choudhary Properties &amp; Consultancy · townships, land and CPC One – Capital Tower</span>
+          <span class="eyebrow" style="padding-left:0">Hotels &amp; resorts</span>
+          <span class="name">JD Stays &amp; Hospitality</span>
+          <span class="chips" id="stay-chips"></span>
           <span class="open">Open →</span>
         </span>
-      </a>
-      <button type="button" class="card circ pop" data-go="ventures" style="animation-delay:.3s">
-        <span class="orb"><span class="plate light" style="width:150px;height:150px"><img src="assets/brands/icon-512.png" alt="JD Group" style="max-width:74%;max-height:74%;border-radius:50%"></span></span>
+      </button>
+      <button type="button" class="card circ pop" data-go="ventures" style="animation-delay:.2s">
+        <span class="orb"><span class="orbit" aria-hidden="true"></span><span class="plate light big"><img src="assets/brands/icon-512.png" alt="JD Group" style="max-width:76%;max-height:76%;border-radius:50%"></span></span>
         <span class="txt">
-          <span class="eyebrow" style="padding-left:0">Dining · nightlife · retail · energy · investments</span>
-          <span class="name sm">Group Ventures</span>
+          <span class="eyebrow" style="padding-left:0">Real estate · energy · dining · nightlife · investments</span>
+          <span class="name">JD Group Companies</span>
           <span class="chips" id="venture-chips"></span>
           <span class="open">Open →</span>
         </span>
@@ -211,15 +208,15 @@ footer a:hover{color:#17140f}
   </div>
 </section>
 
-<!-- 4. Group Ventures -->
+<!-- 4. JD Group Companies (CPC first) -->
 <section class="screen" id="ventures">
   <div class="page center" style="gap:44px;padding-top:32px">
     <button type="button" class="back" data-go="group">← JD Group</button>
     <header class="head pop">
       <div class="mini"><span class="orbit" aria-hidden="true"></span><img src="assets/brands/icon-512.png" alt="JD Group"></div>
-      <h1 class="big-title">Group Ventures</h1>
+      <h1 class="big-title">JD Group Companies</h1>
       <span class="diamond" aria-hidden="true"><i></i><b></b><i></i></span>
-      <span class="eyebrow">Choose a business</span>
+      <span class="eyebrow">Choose a company</span>
     </header>
     <div class="grid" id="vgrid"></div>
   </div>
@@ -235,8 +232,9 @@ var STAYS = [
   { name: "Hotel Kirti Plaza", tag: "Hotel · Chittorgarh", logo: null, ini: "KP", plate: "dark", href: "ventures/kirti-plaza.html" },
   { name: "Crown Fort House", tag: "Opening 2028–30", logo: "crownfort.webp", plate: "light", href: "ventures/crown-fort-house.html" }
 ];
-// Group Ventures (everything except JD Stays and CPC).
+// JD Group Companies: every business except the hotels, CPC first.
 var VENTURES = [
+  { name: "CPC", tag: "Real estate · since 1999", logo: "cpc.webp", plate: "light", href: "ventures/cpc.html" },
   { name: "BPCL Barisadri", tag: "Filling station · 1995", logo: "bpcl.webp", plate: "light", href: "ventures/bpcl-barisadri.html" },
   { name: "Pronite", tag: "Nightlife & events", logo: "pronite.webp", plate: "dark", href: "ventures/pronite.html" },
   { name: "JD Production", tag: "Artists & stages", logo: null, ini: "JDP", plate: "dark", href: "ventures/jd-production.html" },
@@ -264,7 +262,7 @@ function brandTile(b, size, delay) {
 }
 
 document.getElementById("stay-chips").innerHTML = STAYS.map(function (p) { return "<span>" + esc(p.name) + "</span>"; }).join("");
-document.getElementById("venture-chips").innerHTML = VENTURES.slice(0, 6).map(function (p) { return "<span>" + esc(p.name) + "</span>"; }).join("") + "<span>+" + (VENTURES.length - 6) + " more</span>";
+document.getElementById("venture-chips").innerHTML = VENTURES.slice(0, 4).map(function (p) { return "<span>" + esc(p.name) + "</span>"; }).join("") + "<span>+" + (VENTURES.length - 4) + " more</span>";
 
 var props = document.getElementById("props");
 var vgrid = document.getElementById("vgrid");
