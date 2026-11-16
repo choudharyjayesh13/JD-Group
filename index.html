@@ -166,15 +166,15 @@ footer a:hover{color:#17140f}
     </header>
 
     <div class="duo two">
-      <button type="button" class="card circ pop" data-go="stays" style="animation-delay:.05s">
+      <a class="card circ pop" href="https://www.theudaisarovar.com/explore.html" style="animation-delay:.05s">
         <span class="orb"><span class="orbit gold" aria-hidden="true"></span><span class="plate light big"><img src="assets/brands/jd-stays.webp" alt="JD Stays & Hospitality logo"></span></span>
         <span class="txt">
           <span class="eyebrow" style="padding-left:0">Hotels &amp; resorts</span>
           <span class="name">JD Stays &amp; Hospitality</span>
-          <span class="chips" id="stay-chips"></span>
+          <span style="font-size:15px;color:#3a332a;line-height:1.6">Choose your stay in Udaipur · plan it your way</span>
           <span class="open">Open →</span>
         </span>
-      </button>
+      </a>
       <button type="button" class="card circ pop" data-go="ventures" style="animation-delay:.2s">
         <span class="orb"><span class="orbit" aria-hidden="true"></span><span class="plate light big"><img src="assets/brands/icon-512.png" alt="JD Group" style="max-width:76%;max-height:76%;border-radius:50%"></span></span>
         <span class="txt">
@@ -194,20 +194,6 @@ footer a:hover{color:#17140f}
   </footer>
 </section>
 
-<!-- 3. JD Stays & Hospitality: properties pop in one by one -->
-<section class="screen" id="stays">
-  <div class="page center" style="gap:44px;padding-top:32px">
-    <button type="button" class="back" data-go="group">← JD Group</button>
-    <header class="head pop">
-      <div style="position:relative"><span class="orbit gold" aria-hidden="true"></span><span class="stays-logo"><img src="assets/brands/jd-lotus.webp" alt=""></span></div>
-      <h1 class="big-title">JD Stays &amp; Hospitality</h1>
-      <span class="diamond" aria-hidden="true"><i></i><b></b><i></i></span>
-      <span class="eyebrow">Choose your property</span>
-    </header>
-    <div class="props" id="props"></div>
-  </div>
-</section>
-
 <!-- 4. JD Group Companies (CPC first) -->
 <section class="screen" id="ventures">
   <div class="page center" style="gap:44px;padding-top:32px">
@@ -225,13 +211,6 @@ footer a:hover{color:#17140f}
 <div class="toast" id="toast" role="status"></div>
 
 <script>
-// JD Stays & Hospitality properties (guest site).
-var STAYS = [
-  { name: "The Udaisarovar", tag: "Lakeside resort · Udaipur", logo: "udaisarovar.webp", plate: "cover", href: "ventures/udaisarovar.html" },
-  { name: "Hotel Kirti Plaza", tag: "Hotel · Chittorgarh", logo: null, ini: "KP", plate: "dark", href: "ventures/kirti-plaza.html" },
-  { name: "The Glass House", tag: "Udaipur", logo: null, ini: "GH", plate: "dark", href: null },
-  { name: "Crown Fort House", tag: "Opening 2028–30", logo: "crownfort.webp", plate: "light", href: "ventures/crown-fort-house.html" }
-];
 // JD Group Companies: every business except the hotels, CPC first.
 var VENTURES = [
   { name: "CPC", tag: "Real estate · since 1999", logo: "cpc.webp", plate: "light", href: "ventures/cpc.html" },
@@ -261,15 +240,9 @@ function brandTile(b, size, delay) {
   return b.href ? "<a " + attrs + ' href="' + b.href + '">' + body + "</a>" : "<button type=\"button\" " + attrs + ' data-soon="' + esc(b.name) + '">' + body + "</button>";
 }
 
-document.getElementById("stay-chips").innerHTML = STAYS.map(function (p) { return "<span>" + esc(p.name) + "</span>"; }).join("");
 document.getElementById("venture-chips").innerHTML = VENTURES.slice(0, 4).map(function (p) { return "<span>" + esc(p.name) + "</span>"; }).join("") + "<span>+" + (VENTURES.length - 4) + " more</span>";
 
-var props = document.getElementById("props");
 var vgrid = document.getElementById("vgrid");
-function fillStays() {
-  var size = window.innerWidth < 640 ? 150 : 180;
-  props.innerHTML = STAYS.map(function (p, i) { return brandTile(p, size, 0.2 + 0.32 * i); }).join("");
-}
 function fillVentures() {
   var size = window.innerWidth < 640 ? 120 : 140;
   vgrid.innerHTML = VENTURES.map(function (p, i) { return brandTile(p, size, 0.06 * i); }).join("");
@@ -284,11 +257,11 @@ function toast(msg) {
   toastT = setTimeout(function () { t.classList.remove("on"); }, 2600);
 }
 
-var SCREENS = ["splash", "group", "stays", "ventures"];
+var STAYS_URL = "https://www.theudaisarovar.com/explore.html";
+var SCREENS = ["splash", "group", "ventures"];
 function show(id, push) {
   SCREENS.forEach(function (s) { document.getElementById(s).classList.toggle("on", s === id); });
   document.getElementById("topbar").hidden = id === "splash";
-  if (id === "stays") fillStays();
   if (id === "ventures") fillVentures();
   if (push && id !== "splash") history.pushState({ s: id }, "", id === "group" ? location.pathname : "#" + id);
   window.scrollTo(0, 0);
@@ -308,6 +281,7 @@ window.addEventListener("popstate", function () {
 // Opening: the JD logo for a moment, then the businesses. Links like #stays or #ventures open straight there.
 (function start() {
   var h = location.hash.replace("#", "");
+  if (h === "stays") { location.replace(STAYS_URL); return; }
   if (SCREENS.indexOf(h) > 1) { show(h, false); return; }
   var seen = false;
   try { seen = sessionStorage.getItem("jd.opened") === "1"; sessionStorage.setItem("jd.opened", "1"); } catch (err) {}
